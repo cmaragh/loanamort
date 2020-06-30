@@ -1,0 +1,7 @@
+{
+  "name": "loanamort",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
