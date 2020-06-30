@@ -35,7 +35,7 @@ const SaveBarChart = (props) => {
               {
                 display: true,
                 ticks: {
-                  beginAtZero: true,
+                  suggestedMin: props.finalLoanDetails.totalPaid / 2,
                 },
               },
             ],
