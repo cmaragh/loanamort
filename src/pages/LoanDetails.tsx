@@ -93,6 +93,7 @@ const LoanDetails: React.FC<{
           <InfoContainer
             paymentAmount={finalLoanDetails.paymentAmount}
             totalInterest={finalLoanDetails.totalInterest}
+            totalPaid={finalLoanDetails.totalPaid}
           />
         )}
         {finalLoanDetails.calculated && (
