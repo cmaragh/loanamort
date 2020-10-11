@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import SaveBarChart from "./SaveBarChart";
-import { IonItem, IonLabel, IonInput, IonText } from "@ionic/react";
+import {
+  IonItem,
+  IonLabel,
+  IonInput,
+  IonText,
+  IonGrid,
+  IonRow,
+  IonCol,
+} from "@ionic/react";
 
 const SaveContainer: React.FC<{
   finalLoanDetails: any;
@@ -77,23 +85,59 @@ const SaveContainer: React.FC<{
         ></IonInput>
       </IonItem>
       <div className="ion-text-center">
+        <IonGrid>
+          <IonRow>
+            <IonCol>
+              <IonLabel>
+                <p style={{ margin: "3px" }}>Overall Savings</p>
+              </IonLabel>
+            </IonCol>
+            <IonCol>
+              <IonLabel>
+                <p style={{ margin: "3px" }}>New Loan Term</p>
+              </IonLabel>
+            </IonCol>
+            <IonCol>
+              <IonLabel>
+                <p>Original Loan Term</p>
+              </IonLabel>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol>
+              <IonLabel>
+                <h2 style={{ margin: "auto" }}>
+                  {`$${
+                    Math.round(
+                      (props.finalLoanDetails.totalPaid -
+                        newLoanDetails.totalPaid) *
+                        100
+                    ) / 100
+                  }`}
+                </h2>
+              </IonLabel>
+            </IonCol>
+            <IonCol>
+              <IonLabel>
+                <h2 style={{ margin: "auto" }}>{`${
+                  newLoanDetails.newTerm
+                    ? newLoanDetails.newTerm
+                    : props.finalLoanDetails.duration
+                } years`}</h2>
+              </IonLabel>
+            </IonCol>
+            <IonCol>
+              <IonLabel>
+                <h2 style={{ margin: "auto" }}>
+                  {`${props.finalLoanDetails.duration} years`}
+                </h2>
+              </IonLabel>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
         <IonText>
-          <p style={{ margin: "3px" }}>Overall Savings</p>
-          <h2 style={{ margin: "auto" }}>
-            {`$${
-              Math.round(
-                (props.finalLoanDetails.totalPaid - newLoanDetails.totalPaid) *
-                  100
-              ) / 100
-            }`}
-          </h2>
           <br></br>
-          <p style={{ margin: "3px" }}>New Loan Term</p>
-          <h2 style={{ margin: "auto" }}>{`${
-            newLoanDetails.newTerm
-              ? newLoanDetails.newTerm
-              : props.finalLoanDetails.duration
-          } years`}</h2>
+
           <br></br>
           <br></br>
           <br></br>
