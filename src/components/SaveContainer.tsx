@@ -20,6 +20,11 @@ const SaveContainer: React.FC<{
   const [newPaymentAmount, setNewPaymentAmount] = useState<number>(
     props.finalLoanDetails.paymentAmount
   );
+
+  const [newTermDuration, setNewTermDuration] = useState<number>(
+    props.finalLoanDetails.duration
+  );
+
   const [newLoanDetails, setNewLoanDetails] = useState<any>(
     props.finalLoanDetails
   );
@@ -29,11 +34,19 @@ const SaveContainer: React.FC<{
     setSelectedValue(option);
   };
 
+  //Used for the SavingsByPayment component placeholder
   let newPaymentAmountString = "";
   if (newPaymentAmount) {
     newPaymentAmountString = newPaymentAmount.toString();
   }
 
+  let newTermDurationString = "";
+  if (newTermDuration) {
+    newTermDurationString = newTermDuration.toString();
+  }
+
+  //USED FOR SAVINGSBYPAYMENT COMPONENT
+  //This function is passed as prop for SavingsByPayment component and is set by user
   const newPaymentAmountCalc = (value: number) => {
     if (value > props.finalLoanDetails.paymentAmount) {
       setNewPaymentAmount(value);
@@ -68,13 +81,41 @@ const SaveContainer: React.FC<{
       newTerm: Math.round((newTerm / 12) * 10) / 10,
     };
   };
+  //////
+
+  //USED FOR SAVINGSBYYEAR COMPONENT
+
+  const newTermDurationCalc = (term: number) => {
+    setNewTermDuration(term);
+  };
 
   const newPaymentCalc = (loanTerm: number) => {
     const loanAmount = props.finalLoanDetails.enteredPaymentAmount;
     const interestRate = props.finalLoanDetails.interestRate;
     const effectiveInterest = interestRate / (12 * 100);
     const v = 1 / (1 + effectiveInterest);
+    const newNumberOfPayments = loanTerm * 12;
+    const aAngleN = (1 - Math.pow(v, newNumberOfPayments)) / effectiveInterest;
+    const newPaymentAmount =
+      Math.round(
+        (props.finalLoanDetails.enteredPaymentAmount / aAngleN) * 100
+      ) / 100;
+
+    return {
+      newPaymentAmount,
+      totalPaid: Math.round(newPaymentAmount * loanTerm * 12 * 100) / 100,
+      interestSavings:
+        props.finalLoanDetails.totalInterest -
+        (loanTerm * 12 * newPaymentAmount - loanAmount),
+    };
   };
+
+  useEffect(() => {
+    let detailsForGraph;
+    detailsForGraph = newPaymentCalc(newTermDuration);
+    setNewLoanDetails(detailsForGraph);
+  }, [newTermDuration]);
+  //////
 
   return (
     <div className="save-container ion-text-center">
@@ -105,7 +146,12 @@ const SaveContainer: React.FC<{
             newLoanDetails={newLoanDetails}
           />
         ) : (
-          <SavingsByYear />
+          <SavingsByYear
+            newTermDurationString={newTermDurationString}
+            newTermDurationCalc={newTermDurationCalc}
+            finalLoanDetails={props.finalLoanDetails}
+            newLoanDetails={newLoanDetails}
+          />
         )}
       </div>
       <br></br>

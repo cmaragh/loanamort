@@ -8,15 +8,24 @@ import {
   IonInput,
 } from "@ionic/react";
 
-const SavingsByYear: React.FC = (props) => {
+const SavingsByYear: React.FC<{
+  newTermDurationString: string;
+  newTermDurationCalc: (term: number) => void;
+  finalLoanDetails: any;
+  newLoanDetails: any;
+}> = (props) => {
+  const newTermDurationHandler = (event: CustomEvent) => {
+    props.newTermDurationCalc(event.detail.value);
+  };
+
   return (
     <React.Fragment>
       <IonItem className="ion-margin">
         <IonLabel position="floating">Loan Term</IonLabel>
         <IonInput
           type="number"
-        //   placeholder={props.newPaymentAmountString}
-        //   onIonChange={newPaymentAmountHandler}
+            placeholder={props.newTermDurationString}
+            onIonChange={newTermDurationHandler}
         ></IonInput>
       </IonItem>
       <IonGrid>
@@ -28,12 +37,12 @@ const SavingsByYear: React.FC = (props) => {
           </IonCol>
           <IonCol>
             <IonLabel>
-              <p>Adjusted Loan Term</p>
+              <p>Adjusted Monthly Payment</p>
             </IonLabel>
           </IonCol>
           <IonCol>
             <IonLabel>
-              <p>Original Loan Term</p>
+              <p>Original Monthly Payment</p>
             </IonLabel>
           </IonCol>
         </IonRow>
@@ -41,31 +50,31 @@ const SavingsByYear: React.FC = (props) => {
           <IonCol>
             <IonLabel>
               <h2 style={{ margin: "auto" }}>
-                {/* {`$${
+                {`$${
                   Math.round(
                     (props.finalLoanDetails.totalPaid -
                       props.newLoanDetails.totalPaid) *
                       100
                   ) / 100
-                }`} */}
+                }`}
               </h2>
             </IonLabel>
           </IonCol>
           <IonCol>
             <IonLabel>
               <h2 style={{ margin: "auto" }}>
-                  {/* {`${
+                {`${
                 props.newLoanDetails.newTerm
                   ? props.newLoanDetails.newTerm
                   : props.finalLoanDetails.duration
-              } years`} */}
+              } years`}
               </h2>
             </IonLabel>
           </IonCol>
           <IonCol>
             <IonLabel>
               <h2 style={{ margin: "auto" }}>
-                {/* {`${props.finalLoanDetails.duration} years`} */}
+                {`${props.finalLoanDetails.duration} years`}
               </h2>
             </IonLabel>
           </IonCol>
