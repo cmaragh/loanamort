@@ -69,6 +69,13 @@ const SaveContainer: React.FC<{
     };
   };
 
+  const newPaymentCalc = (loanTerm: number) => {
+    const loanAmount = props.finalLoanDetails.enteredPaymentAmount;
+    const interestRate = props.finalLoanDetails.interestRate;
+    const effectiveInterest = interestRate / (12 * 100);
+    const v = 1 / (1 + effectiveInterest);
+  };
+
   return (
     <div className="save-container ion-text-center">
       <IonText color="primary">

@@ -24,7 +24,7 @@ const InfoContainer: React.FC<{
         <IonRow>
           <IonCol>
             <IonLabel>
-              <p>Monthly Payment</p>
+              <p>Estimated Monthly Payment</p>
             </IonLabel>
             <IonLabel>
               <h2>${Number(props.paymentAmount).toLocaleString()}</h2>
