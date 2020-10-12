@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SaveBarChart from "./SaveBarChart";
+import TogglePaymentYear from './TogglePaymentYear';
 import {
   IonItem,
   IonLabel,
@@ -76,8 +77,9 @@ const SaveContainer: React.FC<{
           run.
         </IonText>
       </IonItem>
+      <TogglePaymentYear />
       <IonItem className="ion-margin">
-        <IonLabel position="floating">Adjust Payment</IonLabel>
+        <IonLabel position="floating">Monthly Payment</IonLabel>
         <IonInput
           type="number"
           placeholder={newPaymentAmountString}
@@ -89,12 +91,12 @@ const SaveContainer: React.FC<{
           <IonRow>
             <IonCol>
               <IonLabel>
-                <p style={{ margin: "3px" }}>Overall Savings</p>
+                <p>Overall Savings</p>
               </IonLabel>
             </IonCol>
             <IonCol>
               <IonLabel>
-                <p style={{ margin: "3px" }}>New Loan Term</p>
+                <p>Adjusted Loan Term</p>
               </IonLabel>
             </IonCol>
             <IonCol>
