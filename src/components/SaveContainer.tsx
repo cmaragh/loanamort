@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SaveBarChart from "./SaveBarChart";
-import TogglePaymentYear from './TogglePaymentYear';
+import TogglePaymentYear from "./TogglePaymentYear";
+import SavingsByPayment from "./SavingsByPayment";
 import {
   IonItem,
   IonLabel,
@@ -21,14 +22,19 @@ const SaveContainer: React.FC<{
     props.finalLoanDetails
   );
 
+  const [selectedValue, setSelectedValue] = useState<string>("Payment");
+  const toggleOption = (option: string) => {
+    setSelectedValue(option);
+  };
+
   let newPaymentAmountString = "";
   if (newPaymentAmount) {
     newPaymentAmountString = newPaymentAmount.toString();
   }
 
-  const newPaymentAmountHandler = (event: CustomEvent) => {
-    if (event.detail.value > props.finalLoanDetails.paymentAmount) {
-      setNewPaymentAmount(event.detail.value);
+  const newPaymentAmountCalc = (value: number) => {
+    if (value > props.finalLoanDetails.paymentAmount) {
+      setNewPaymentAmount(value);
     } else {
       setNewPaymentAmount(props.finalLoanDetails.paymentAmount);
     }
@@ -77,74 +83,25 @@ const SaveContainer: React.FC<{
           run.
         </IonText>
       </IonItem>
-      <TogglePaymentYear />
-      <IonItem className="ion-margin">
-        <IonLabel position="floating">Monthly Payment</IonLabel>
-        <IonInput
-          type="number"
-          placeholder={newPaymentAmountString}
-          onIonChange={newPaymentAmountHandler}
-        ></IonInput>
-      </IonItem>
+      <TogglePaymentYear
+        toggleOption={toggleOption}
+        selectedValue={selectedValue}
+      />
       <div className="ion-text-center">
-        <IonGrid>
-          <IonRow>
-            <IonCol>
-              <IonLabel>
-                <p>Overall Savings</p>
-              </IonLabel>
-            </IonCol>
-            <IonCol>
-              <IonLabel>
-                <p>Adjusted Loan Term</p>
-              </IonLabel>
-            </IonCol>
-            <IonCol>
-              <IonLabel>
-                <p>Original Loan Term</p>
-              </IonLabel>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol>
-              <IonLabel>
-                <h2 style={{ margin: "auto" }}>
-                  {`$${
-                    Math.round(
-                      (props.finalLoanDetails.totalPaid -
-                        newLoanDetails.totalPaid) *
-                        100
-                    ) / 100
-                  }`}
-                </h2>
-              </IonLabel>
-            </IonCol>
-            <IonCol>
-              <IonLabel>
-                <h2 style={{ margin: "auto" }}>{`${
-                  newLoanDetails.newTerm
-                    ? newLoanDetails.newTerm
-                    : props.finalLoanDetails.duration
-                } years`}</h2>
-              </IonLabel>
-            </IonCol>
-            <IonCol>
-              <IonLabel>
-                <h2 style={{ margin: "auto" }}>
-                  {`${props.finalLoanDetails.duration} years`}
-                </h2>
-              </IonLabel>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
-        <IonText>
-          <br></br>
-
-          <br></br>
-          <br></br>
-          <br></br>
-        </IonText>
+        {selectedValue === "Payment" ? (
+          <SavingsByPayment
+            newPaymentAmountString={newPaymentAmountString}
+            newPaymentAmountCalc={newPaymentAmountCalc}
+            finalLoanDetails={props.finalLoanDetails}
+            newLoanDetails={newLoanDetails}
+          />
+        ) : (
+          "SavingsByYear"
+        )}
       </div>
+      <br></br>
+      <br></br>
+      <br></br>
       <SaveBarChart
         newLoanDetails={newLoanDetails}
         finalLoanDetails={props.finalLoanDetails}
