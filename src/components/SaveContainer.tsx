@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import SaveBarChart from "./SaveBarChart";
 import TogglePaymentYear from "./TogglePaymentYear";
 import SavingsByPayment from "./SavingsByPayment";
+import SavingsByYear from "./SavingsByYear";
+
 import {
   IonItem,
   IonLabel,
@@ -96,7 +98,7 @@ const SaveContainer: React.FC<{
             newLoanDetails={newLoanDetails}
           />
         ) : (
-          "SavingsByYear"
+          <SavingsByYear />
         )}
       </div>
       <br></br>
