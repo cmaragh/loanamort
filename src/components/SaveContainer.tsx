@@ -86,7 +86,11 @@ const SaveContainer: React.FC<{
   //USED FOR SAVINGSBYYEAR COMPONENT
 
   const newTermDurationCalc = (term: number) => {
-    setNewTermDuration(term);
+    if (term > 0) {
+      setNewTermDuration(term);
+    } else {
+      setNewTermDuration(props.finalLoanDetails.duration);
+    }
   };
 
   const newPaymentCalc = (loanTerm: number) => {

@@ -71,7 +71,7 @@ const App: React.FC = () => {
             </IonTabButton>
             <IonTabButton tab="save" href="/save">
               <IonIcon icon={cashOutline} />
-              <IonLabel>How To Save</IonLabel>
+              <IonLabel>Manage Loan</IonLabel>
             </IonTabButton>
           </IonTabBar>
         </IonTabs>

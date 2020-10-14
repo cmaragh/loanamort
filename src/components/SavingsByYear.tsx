@@ -21,7 +21,7 @@ const SavingsByYear: React.FC<{
   return (
     <React.Fragment>
       <IonItem className="ion-margin">
-        <IonLabel position="floating">Loan Term</IonLabel>
+        <IonLabel position="floating">Loan Term (years)</IonLabel>
         <IonInput
           type="number"
             placeholder={props.newTermDurationString}
@@ -63,18 +63,18 @@ const SavingsByYear: React.FC<{
           <IonCol>
             <IonLabel>
               <h2 style={{ margin: "auto" }}>
-                {`${
-                props.newLoanDetails.newTerm
-                  ? props.newLoanDetails.newTerm
-                  : props.finalLoanDetails.duration
-              } years`}
+                {`$${
+                props.newLoanDetails.newPaymentAmount
+                  ? props.newLoanDetails.newPaymentAmount
+                  : props.finalLoanDetails.paymentAmount
+              }`}
               </h2>
             </IonLabel>
           </IonCol>
           <IonCol>
             <IonLabel>
               <h2 style={{ margin: "auto" }}>
-                {`${props.finalLoanDetails.duration} years`}
+                {`$${props.finalLoanDetails.paymentAmount}`}
               </h2>
             </IonLabel>
           </IonCol>

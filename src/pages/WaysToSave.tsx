@@ -18,7 +18,7 @@ const WaysToSave: React.FC<{
     <IonPage>
       <IonHeader>
         <IonToolbar color="primary">
-          <IonTitle>How To Save</IonTitle>
+          <IonTitle>Manage Loan</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
