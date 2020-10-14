@@ -17,6 +17,22 @@ const SavingsByPayment: React.FC<{
   const newPaymentAmountHandler = (event: CustomEvent) => {
     props.newPaymentAmountCalc(event.detail.value);
   };
+
+  const overallChange =
+    Math.round(
+      (props.finalLoanDetails.totalPaid - props.newLoanDetails.totalPaid) * 100
+    ) / 100;
+
+  let overallChangeColor = "white";
+
+  if (overallChange === 0) {
+    overallChangeColor = "white";
+  } else if (overallChange > 0) {
+    overallChangeColor = "green";
+  } else if (overallChange < 0) {
+    overallChangeColor = "red";
+  }
+
   return (
     <React.Fragment>
       <IonItem className="ion-margin">
@@ -31,7 +47,7 @@ const SavingsByPayment: React.FC<{
         <IonRow>
           <IonCol>
             <IonLabel>
-              <p>Overall Savings</p>
+              <p>Overall Savings or Loss</p>
             </IonLabel>
           </IonCol>
           <IonCol>
@@ -48,15 +64,7 @@ const SavingsByPayment: React.FC<{
         <IonRow>
           <IonCol>
             <IonLabel>
-              <h2 style={{ margin: "auto" }}>
-                {`$${
-                  Math.round(
-                    (props.finalLoanDetails.totalPaid -
-                      props.newLoanDetails.totalPaid) *
-                      100
-                  ) / 100
-                }`}
-              </h2>
+              <h2 style={{ margin: "auto", color: overallChangeColor }}>{`$${overallChange}`}</h2>
             </IonLabel>
           </IonCol>
           <IonCol>
