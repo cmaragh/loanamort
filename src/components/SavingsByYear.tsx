@@ -20,21 +20,34 @@ const SavingsByYear: React.FC<{
     props.newTermDurationCalc(event.detail.value);
   };
 
+  const overallChange =
+    Math.round(
+      (props.finalLoanDetails.totalPaid - props.newLoanDetails.totalPaid) * 100
+    ) / 100;
+
+  if (overallChange === 0) {
+    props.savingsColorHandler("#EDEDED");
+  } else if (overallChange > 0) {
+    props.savingsColorHandler("#72C953");
+  } else if (overallChange < 0) {
+    props.savingsColorHandler("#ED4040");
+  }
+
   return (
     <React.Fragment>
       <IonItem className="ion-margin">
         <IonLabel position="floating">Loan Term (years)</IonLabel>
         <IonInput
           type="number"
-            placeholder={props.newTermDurationString}
-            onIonChange={newTermDurationHandler}
+          placeholder={props.newTermDurationString}
+          onIonChange={newTermDurationHandler}
         ></IonInput>
       </IonItem>
       <IonGrid>
         <IonRow>
           <IonCol>
             <IonLabel>
-              <p>Overall Savings</p>
+              <p>Overall Savings or Loss</p>
             </IonLabel>
           </IonCol>
           <IonCol>
@@ -51,25 +64,22 @@ const SavingsByYear: React.FC<{
         <IonRow>
           <IonCol>
             <IonLabel>
-              <h2 style={{ margin: "auto" }}>
-                {`$${
-                  Math.round(
-                    (props.finalLoanDetails.totalPaid -
-                      props.newLoanDetails.totalPaid) *
-                      100
-                  ) / 100
-                }`}
-              </h2>
+              <h2
+                style={{
+                  margin: "auto",
+                  color: overallChange === 0 ? "initial" : props.savingsColor,
+                }}
+              >{`$${overallChange}`}</h2>
             </IonLabel>
           </IonCol>
           <IonCol>
             <IonLabel>
               <h2 style={{ margin: "auto" }}>
                 {`$${
-                props.newLoanDetails.newPaymentAmount
-                  ? props.newLoanDetails.newPaymentAmount
-                  : props.finalLoanDetails.paymentAmount
-              }`}
+                  props.newLoanDetails.newPaymentAmount
+                    ? props.newLoanDetails.newPaymentAmount
+                    : props.finalLoanDetails.paymentAmount
+                }`}
               </h2>
             </IonLabel>
           </IonCol>

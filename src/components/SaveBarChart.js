@@ -11,7 +11,7 @@ const SaveBarChart = (props) => {
             Math.round(props.finalLoanDetails.totalPaid * 100) / 100,
             props.newLoanDetails.totalPaid,
           ],
-          backgroundColor: ["#EDEDED", "#72C953"],
+          backgroundColor: ["#EDEDED", props.savingsColor],
           borderColor: "black",
           borderWidth: "1",
           barThickness: 70,
