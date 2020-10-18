@@ -13,6 +13,8 @@ const SavingsByYear: React.FC<{
   newTermDurationCalc: (term: number) => void;
   finalLoanDetails: any;
   newLoanDetails: any;
+  savingsColor: string;
+  savingsColorHandler: (color: string) => void;
 }> = (props) => {
   const newTermDurationHandler = (event: CustomEvent) => {
     props.newTermDurationCalc(event.detail.value);

@@ -30,6 +30,13 @@ const SaveContainer: React.FC<{
   );
 
   const [selectedValue, setSelectedValue] = useState<string>("Payment");
+
+
+  const [savingsColor, setSavingsColor] = useState<string>("#EDEDED");
+  const savingsColorHandler = (color: string) => {
+    setSavingsColor(color);
+  }
+
   const toggleOption = (option: string) => {
     setSelectedValue(option);
   };
@@ -105,13 +112,15 @@ const SaveContainer: React.FC<{
         (props.finalLoanDetails.enteredPaymentAmount / aAngleN) * 100
       ) / 100;
 
-    return {
-      newPaymentAmount,
-      totalPaid: Math.round(newPaymentAmount * loanTerm * 12 * 100) / 100,
-      interestSavings:
-        props.finalLoanDetails.totalInterest -
-        (loanTerm * 12 * newPaymentAmount - loanAmount),
-    };
+    return loanTerm == props.finalLoanDetails.duration
+      ? props.finalLoanDetails
+      : {
+          newPaymentAmount,
+          totalPaid: Math.round(newPaymentAmount * loanTerm * 12 * 100) / 100,
+          interestSavings:
+            props.finalLoanDetails.totalInterest -
+            (loanTerm * 12 * newPaymentAmount - loanAmount),
+        };
   };
 
   useEffect(() => {
@@ -148,6 +157,8 @@ const SaveContainer: React.FC<{
             newPaymentAmountCalc={newPaymentAmountCalc}
             finalLoanDetails={props.finalLoanDetails}
             newLoanDetails={newLoanDetails}
+            savingsColor={savingsColor}
+            savingsColorHandler={savingsColorHandler}
           />
         ) : (
           <SavingsByYear
@@ -155,6 +166,8 @@ const SaveContainer: React.FC<{
             newTermDurationCalc={newTermDurationCalc}
             finalLoanDetails={props.finalLoanDetails}
             newLoanDetails={newLoanDetails}
+            savingsColor={savingsColor}
+            savingsColorHandler={savingsColorHandler}
           />
         )}
       </div>
@@ -164,6 +177,7 @@ const SaveContainer: React.FC<{
       <SaveBarChart
         newLoanDetails={newLoanDetails}
         finalLoanDetails={props.finalLoanDetails}
+        savingsColor={savingsColor}
       />
     </div>
   );

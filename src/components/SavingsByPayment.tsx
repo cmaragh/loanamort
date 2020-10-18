@@ -13,6 +13,8 @@ const SavingsByPayment: React.FC<{
   newPaymentAmountCalc: (payment: number) => void;
   finalLoanDetails: any;
   newLoanDetails: any;
+  savingsColor: string;
+  savingsColorHandler: (color: string) => void;
 }> = (props) => {
   const newPaymentAmountHandler = (event: CustomEvent) => {
     props.newPaymentAmountCalc(event.detail.value);
@@ -23,14 +25,12 @@ const SavingsByPayment: React.FC<{
       (props.finalLoanDetails.totalPaid - props.newLoanDetails.totalPaid) * 100
     ) / 100;
 
-  let overallChangeColor = "white";
-
   if (overallChange === 0) {
-    overallChangeColor = "white";
+    props.savingsColorHandler("#EDEDED");
   } else if (overallChange > 0) {
-    overallChangeColor = "green";
+    props.savingsColorHandler("#72C953");
   } else if (overallChange < 0) {
-    overallChangeColor = "red";
+    props.savingsColorHandler("#ED4040");
   }
 
   return (
@@ -64,7 +64,12 @@ const SavingsByPayment: React.FC<{
         <IonRow>
           <IonCol>
             <IonLabel>
-              <h2 style={{ margin: "auto", color: overallChangeColor }}>{`$${overallChange}`}</h2>
+              <h2
+                style={{
+                  margin: "auto",
+                  color: overallChange === 0 ? "initial" : props.savingsColor,
+                }}
+              >{`$${overallChange}`}</h2>
             </IonLabel>
           </IonCol>
           <IonCol>
