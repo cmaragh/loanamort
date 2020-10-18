@@ -26,14 +26,20 @@ const InfoContainer: React.FC<{
             <IonLabel>
               <p>Estimated Monthly Payment</p>
             </IonLabel>
-            <IonLabel>
-              <h2>${Number(props.paymentAmount).toLocaleString()}</h2>
-            </IonLabel>
           </IonCol>
           <IonCol>
             <IonLabel>
               <p>Total Interest Paid</p>
             </IonLabel>
+          </IonCol>
+        </IonRow>
+        <IonRow>
+          <IonCol>
+            <IonLabel>
+              <h2>${Number(props.paymentAmount).toLocaleString()}</h2>
+            </IonLabel>
+          </IonCol>
+          <IonCol>
             <IonLabel>
               <h2>${Number(props.totalInterest).toLocaleString()}</h2>
             </IonLabel>

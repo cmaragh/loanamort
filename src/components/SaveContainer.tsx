@@ -43,7 +43,7 @@ const SaveContainer: React.FC<{
   const resetDetails = () => {
     setNewPaymentAmount(props.finalLoanDetails.paymentAmount);
     setNewTermDuration(props.finalLoanDetails.duration);
-  }
+  };
 
   //Used for the SavingsByPayment component placeholder
   let newPaymentAmountString = "";
@@ -143,14 +143,14 @@ const SaveContainer: React.FC<{
         <h1>Current Payment</h1>
       </IonText>
       <IonText color="primary">
-        <h1>{props.finalLoanDetails.paymentAmount}</h1>
+        <h1>{`$${props.finalLoanDetails.paymentAmount}`}</h1>
       </IonText>
 
       <IonItem className="ion-margin">
         <IonText>
-          The more you pay per month, the less you pay overall! Try increasing
-          your payment by any amount to see how much you will save in the long
-          run.
+          The more you pay per month or the faster you pay it off, the less you
+          pay overall! Try adjusting your payment or term to see how it impacts
+          your loan.
         </IonText>
       </IonItem>
       <TogglePaymentYear
