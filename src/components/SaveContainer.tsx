@@ -31,11 +31,10 @@ const SaveContainer: React.FC<{
 
   const [selectedValue, setSelectedValue] = useState<string>("Payment");
 
-
   const [savingsColor, setSavingsColor] = useState<string>("#EDEDED");
   const savingsColorHandler = (color: string) => {
     setSavingsColor(color);
-  }
+  };
 
   const toggleOption = (option: string) => {
     setSelectedValue(option);
@@ -55,7 +54,7 @@ const SaveContainer: React.FC<{
   //USED FOR SAVINGSBYPAYMENT COMPONENT
   //This function is passed as prop for SavingsByPayment component and is set by user
   const newPaymentAmountCalc = (value: number) => {
-    if (value > props.finalLoanDetails.paymentAmount) {
+    if (value > 0) {
       setNewPaymentAmount(value);
     } else {
       setNewPaymentAmount(props.finalLoanDetails.paymentAmount);
@@ -64,7 +63,7 @@ const SaveContainer: React.FC<{
 
   useEffect(() => {
     let detailsForGraph;
-    if (newPaymentAmount > props.finalLoanDetails.paymentAmount) {
+    if (newPaymentAmount > 0) {
       detailsForGraph = newLoanTermsCalc(newPaymentAmount);
       setNewLoanDetails(detailsForGraph);
     } else {

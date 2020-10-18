@@ -69,7 +69,11 @@ const SavingsByYear: React.FC<{
                   margin: "auto",
                   color: overallChange === 0 ? "initial" : props.savingsColor,
                 }}
-              >{`$${overallChange}`}</h2>
+              >
+                {isNaN(overallChange)
+                  ? "Not enough to pay off loan"
+                  : `$${overallChange}`}
+              </h2>
             </IonLabel>
           </IonCol>
           <IonCol>
