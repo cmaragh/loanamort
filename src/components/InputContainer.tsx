@@ -11,6 +11,8 @@ import {
 } from "@ionic/react";
 
 import "./GrayContainer.css";
+import HelpButton from "./HelpButton";
+import HelpModal from "./HelpModal";
 
 const InputContainer: React.FC<{
   loanDetailsHandler: (details: object) => void;
@@ -19,15 +21,20 @@ const InputContainer: React.FC<{
   const durationRef = useRef<HTMLIonInputElement>(null);
   const interestRateRef = useRef<HTMLIonInputElement>(null);
 
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const showModalHandler = () => {
+    setShowModal(!showModal);
+  };
+
   const passInitialDetails = () => {
     const initialDetails = {
       loanAmount: loanAmountRef.current!.value,
       duration: durationRef.current!.value,
-      interestRate: interestRateRef.current!.value
+      interestRate: interestRateRef.current!.value,
     };
 
     props.loanDetailsHandler(initialDetails);
-  }
+  };
 
   return (
     <div>
@@ -66,8 +73,10 @@ const InputContainer: React.FC<{
               Calculate
             </IonButton>
           </IonCol>
+          <HelpButton showModalHandler={showModalHandler} />
         </IonRow>
       </IonGrid>
+      <HelpModal showModal={showModal} showModalHandler={showModalHandler} />
     </div>
   );
 };

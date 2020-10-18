@@ -11,6 +11,7 @@ import {
 import InputContainer from "../components/InputContainer";
 import InfoContainer from "../components/InfoContainer";
 import Chart from "../components/Chart";
+import HelpButton from '../components/HelpButton';
 
 import "../theme/variables.css";
 
