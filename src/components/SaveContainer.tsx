@@ -40,6 +40,11 @@ const SaveContainer: React.FC<{
     setSelectedValue(option);
   };
 
+  const resetDetails = () => {
+    setNewPaymentAmount(props.finalLoanDetails.paymentAmount);
+    setNewTermDuration(props.finalLoanDetails.duration);
+  }
+
   //Used for the SavingsByPayment component placeholder
   let newPaymentAmountString = "";
   if (newPaymentAmount) {
@@ -79,13 +84,16 @@ const SaveContainer: React.FC<{
     const newTerm =
       Math.log(1 - (loanAmount * effectiveInterest) / payment) / Math.log(v);
 
-    return {
-      payment: payment,
-      totalPaid: Math.round(payment * newTerm * 100) / 100,
-      interestSavings:
-        props.finalLoanDetails.totalInterest - (newTerm * payment - loanAmount),
-      newTerm: Math.round((newTerm / 12) * 10) / 10,
-    };
+    return payment == props.finalLoanDetails.paymentAmount
+      ? props.finalLoanDetails
+      : {
+          payment: payment,
+          totalPaid: Math.round(payment * newTerm * 100) / 100,
+          interestSavings:
+            props.finalLoanDetails.totalInterest -
+            (newTerm * payment - loanAmount),
+          newTerm: Math.round((newTerm / 12) * 10) / 10,
+        };
   };
   //////
 
@@ -148,6 +156,7 @@ const SaveContainer: React.FC<{
       <TogglePaymentYear
         toggleOption={toggleOption}
         selectedValue={selectedValue}
+        resetDetails={resetDetails}
       />
       <div className="ion-text-center">
         {selectedValue === "Payment" ? (

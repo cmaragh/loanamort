@@ -4,9 +4,11 @@ import { IonSegment, IonSegmentButton, IonLabel } from "@ionic/react";
 const TogglePaymentYear: React.FC<{
   selectedValue: string;
   toggleOption: (value: string) => void;
+  resetDetails: () => void;
 }> = (props) => {
   const toggleOptionHandler = (event: CustomEvent) => {
     props.toggleOption(event.detail.value);
+    props.resetDetails();
   };
 
   return (
