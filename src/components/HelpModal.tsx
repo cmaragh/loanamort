@@ -80,6 +80,14 @@ const HelpModal: React.FC<{
             payments, each payment includes more principal and less interest
             (although they start with mostly interest).
           </p>
+          <p>
+            Many payments have fees that are separate from the principal and
+            interest. For example, a mortgage payment will include taxes,
+            insurance, HOA fees, etc. These parts of a monthly payment are not
+            included here in the calculation of your estimated monthly payment.
+            In other words, principal and interest on paying off a loan are the
+            only factors accounted for here.
+          </p>
         </IonText>
         <br></br>
         <IonLabel>
@@ -87,10 +95,10 @@ const HelpModal: React.FC<{
         </IonLabel>
         <IonText>
           <p>
-            This is the interest rate associated with your loan. Typically, a
-            better credit score means a lower interest rate. This is a factor
-            that affects the total cost of a loan (along with loan duration);
-            the higher the interest rate, the more the overall cost of the loan.
+            This is effectively how much it costs you to borrow the money stated
+            on the loan. The two most important factors that affect the total
+            interest are the time to pay it off and the interest rate associated
+            with the loan.
           </p>
         </IonText>
       </IonContent>
